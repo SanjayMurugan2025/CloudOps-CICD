@@ -43,9 +43,16 @@ pipeline {
                 }
             }
         }
+
         stage('Docker Build') {
             steps {
                 bat 'docker build -t cloudops-react:latest .'
+            }
+        }
+
+        stage('Trivy Scan') {
+            steps {
+                bat 'C:\\trivy\\trivy.exe image --exit-code 1 --severity HIGH,CRITICAL cloudops-react:latest'
             }
         }
     }
