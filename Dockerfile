@@ -1,5 +1,7 @@
 FROM nginx:alpine
 
+RUN apk update && apk upgrade
+
 RUN sed -i 's/listen       80;/listen       8080;/' /etc/nginx/conf.d/default.conf \
     && sed -i 's/listen  \[::\]:80;/listen       8080;/' /etc/nginx/conf.d/default.conf \
     && chown -R nginx:nginx /var/cache/nginx \
